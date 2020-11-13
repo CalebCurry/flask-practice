@@ -6,4 +6,4 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 db = SQLAlchemy(app)
 
-import drink_ratings.views
+import drink_ratings.routes
