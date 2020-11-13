@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, render_template, abort
 from flask_sqlalchemy import SQLAlchemy
 
-application = Flask(__name__)
-app = application
+app = Flask(__name__)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 db = SQLAlchemy(app)
 
