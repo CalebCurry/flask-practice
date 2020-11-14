@@ -1,5 +1,5 @@
 from drink_ratings import app
-from flask import render_template, abort
+from flask import render_template, abort, url_for
 
 
 drinks = {
@@ -10,7 +10,7 @@ drinks = {
     1: {
         'name': 'Grape',
         'rating': 10
-    }
+    },
 }
 
 
