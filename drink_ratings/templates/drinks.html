@@ -1,9 +1,16 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>My favorite Drinks!</h1>
-    <div class="wrapper">
+    <!--<h1>My favorite Drinks!</h1> -->
         {% for id, drink in drinks.items() %}
-        <div><a href='/drinks/{{id}}'>{{ drink.name }}</a></div>
+        <div class="card">
+                <img src="https://www.zevia.com/sites/default/files/2019-07/GrapeNR-1.png ">
+
+               <h2 class="card-title">{{drink.name}}</h2>
+                <div class="card-content">
+                    <p>Tastes like that one icecream</p>
+                    <a href='/drinks/{{id}}'>More info / Edit</a>
+                </div>
+
+        </div>
         {% endfor %}
-    </div>
 {% endblock %}

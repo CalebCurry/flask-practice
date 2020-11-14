@@ -1,6 +1,58 @@
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
-  align-items: end;
-  grid-auto-rows: 200px;
+  grid-template-rows: 5em auto 5em;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "header header header"
+  "main main main"
+  "footer footer footer";
+  /*align-items: end; */
+  /*grid-auto-rows: 200px; */
+}
+
+header{
+    grid-area:header;
+}
+
+header,
+footer {
+    background: black;
+    color: yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "card";
+
+}
+
+footer {
+    grid-area: footer;
+}
+
+.card {
+    /*grid-area: card;*/
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: min-content auto;
+    grid-template-areas: "img title" "img content"
+}
+
+.card-image {
+    grid-area: img;
+    background: pink;
+}
+
+.card-title {
+    grid-area: title;
+    background: blue;
+}
+
+.card-content {
+    grid-area: content;
+    background: green;
 }
