@@ -1,16 +1,10 @@
-<!doctype html>
-<html>
-<head>
-    <title>Drink Ratings</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
     <h1>My favorite Drinks!</h1>
     <ul>
         {% for id, drink in drinks.items() %}
         <li><a href='/drinks/{{id}}'>{{ drink.name }}</a></li>
         {% endfor %}
     </ul>
-</body>
-</html>
-
+{% endblock %}
 

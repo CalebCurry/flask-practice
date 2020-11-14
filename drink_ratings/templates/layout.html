@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+<head>
+    {% if title %}
+         <title>Drink Ratings - {{title}}</title>
+    {% else %}
+        <title>Drink Ratings</title>
+    {% endif %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>
+</html>

@@ -16,7 +16,7 @@ drinks = {
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'), 404
+    return render_template('404.html', title="404"), 404
 
 
 @app.route('/')
@@ -59,4 +59,4 @@ def get_rating(id):
     if drink is None:
         abort(404, description="Resource not found")
 
-    return render_template("drink.html", drink=drinks.get(int(id)))
+    return render_template("drink.html", title=drink.get('name'), drink=drink)

@@ -1,11 +1,6 @@
-<!doctype html>
-<html>
-<head>
-    <title>{{drink.name}}</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
     <h1>{{drink.name}}</h1>
     <p>My rating: {{drink.rating}}</p>
     <p><a href="/drinks">Go back</a></p>
-</body>
-</html>
+{% endblock %}
