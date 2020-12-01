@@ -60,6 +60,16 @@ footer {
 
 .card-content {
   grid-area: content;
+}
+
+input {
+  margin: 5px;
+}
+
+textarea {
+  width: 300px;
+  height: 150px;
+}
 
 /*
 .card {

@@ -1,6 +1,24 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>{{drink.name}}</h1>
-    <p>My rating: {{drink.rating}}</p>
-    <p><a href="/drinks">Go back</a></p>
+<form method='post' class="card">
+    <img src="{{drink.src}}" alt="" class="card-img">
+    <h2 class="card-title">{{drink.name}}</h2>
+
+    <div class="card-content">
+        <div>
+            <label>
+                <span>Description: </span>
+                <textarea name="content" required>{{drink.content}}</textarea>
+            </label>
+        </div>
+        <div>
+            <label>
+               <span>My rating:</span>
+               <input type="text" name="rating"required value='{{drink.rating}}'>
+            </label>
+        </div>
+        <p><a href="/drinks">Go back</a></p>
+        <input type="submit" value="Update!">
+    </div>
+</form>
 {% endblock %}

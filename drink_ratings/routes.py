@@ -2,16 +2,23 @@ from drink_ratings import app
 from flask import render_template, abort, url_for
 
 
-drinks = {
-    0: {
+drinks = [
+    {
+        'id': 0,
         'name': 'Black Cherry',
-        'rating': 0
+        'rating': 0,
+        'content': 'This tastes like that one icecream.This tastes like that one icecream.',
+        'src': 'https://image-cdn.symphonycommerce.com/images/sites/zevia/1548198074952_-601754611584738134.1200w.png'
     },
-    1: {
+    {
+        'id': 1,
         'name': 'Grape',
-        'rating': 10
+        'rating': 10,
+        'content': 'Grapes yeeeeeett.',
+        'src': 'https://image-cdn.symphonycommerce.com/images/sites/zevia/1548198170455_4685159556406169821.1200w.png'
+        #'src': 'https://www.zevia.com/sites/default/files/2019-07/GrapeNR-1.png'
     },
-}
+]
 
 
 @app.errorhandler(404)
@@ -53,10 +60,12 @@ def new_post():
 
 @app.route('/drinks/<id>')
 def get_rating(id):
-    # this needs to be an int.
-    # return drinks.get(int(id)) # for json
-    drink = drinks.get(int(id))
+
+    drink = None
+
+    for d in drinks:
+        if int(d.get('id')) == int(id):
+            drink = d
     if drink is None:
         abort(404, description="Resource not found")
-
     return render_template("drink.html", title=drink.get('name'), drink=drink)
