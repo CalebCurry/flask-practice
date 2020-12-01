@@ -54,7 +54,6 @@ footer {
 
 .card-title {
   grid-area: title;
-  margin: 0;
   font-weight: 300;
 }
 
@@ -69,6 +68,8 @@ input {
 textarea {
   width: 300px;
   height: 150px;
+  padding: 1px;
+  margin: 5px;
 }
 
 /*
