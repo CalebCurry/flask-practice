@@ -1,16 +1,22 @@
 {% extends "layout.html" %}
 {% block content %}
+    <main class='home'>
     <!--<h1>My favorite Drinks!</h1> -->
-        {% for drink in drinks %}
+    {% for drink in drinks %}
 
-         <div class="card">
-            <img src="{{drink.src}}" alt="" class="card-img">
+     <div class="card">
+        <div>
+            <img src="{{drink.src}}" alt="" class="card-img"></div>
+        <div class='content'>
             <h2 class="card-title">{{drink.name}}</h2>
             <div class="card-content">{{drink.content}} </p>
                 <a href="/drinks/{{drink.id}}">More info</a>
             </div>
         </div>
+    </div>
 
 
-        {% endfor %}
+    {% endfor %}
+</main>
 {% endblock %}
+

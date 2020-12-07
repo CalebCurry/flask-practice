@@ -1,5 +1,5 @@
 from drink_ratings import app
-from flask import render_template, abort, url_for
+from flask import render_template, abort, url_for, request
 
 
 drinks = [
@@ -9,6 +9,101 @@ drinks = [
         'rating': 0,
         'content': 'This tastes like that one icecream.This tastes like that one icecream.',
         'src': 'https://image-cdn.symphonycommerce.com/images/sites/zevia/1548198074952_-601754611584738134.1200w.png'
+    },
+    {
+        'id': 1,
+        'name': 'Grape',
+        'rating': 10,
+        'content': 'Grapes yeeeeeett.',
+        'src': 'https://image-cdn.symphonycommerce.com/images/sites/zevia/1548198170455_4685159556406169821.1200w.png'
+        #'src': 'https://www.zevia.com/sites/default/files/2019-07/GrapeNR-1.png'
+    },
+    {
+        'id': 1,
+        'name': 'Grape',
+        'rating': 10,
+        'content': 'Grapes yeeeeeett.',
+        'src': 'https://image-cdn.symphonycommerce.com/images/sites/zevia/1548198170455_4685159556406169821.1200w.png'
+        #'src': 'https://www.zevia.com/sites/default/files/2019-07/GrapeNR-1.png'
+    },
+    {
+        'id': 1,
+        'name': 'Grape',
+        'rating': 10,
+        'content': 'Grapes yeeeeeett.',
+        'src': 'https://image-cdn.symphonycommerce.com/images/sites/zevia/1548198170455_4685159556406169821.1200w.png'
+        #'src': 'https://www.zevia.com/sites/default/files/2019-07/GrapeNR-1.png'
+    },
+    {
+        'id': 1,
+        'name': 'Grape',
+        'rating': 10,
+        'content': 'Grapes yeeeeeett.',
+        'src': 'https://image-cdn.symphonycommerce.com/images/sites/zevia/1548198170455_4685159556406169821.1200w.png'
+        #'src': 'https://www.zevia.com/sites/default/files/2019-07/GrapeNR-1.png'
+    },
+    {
+        'id': 1,
+        'name': 'Grape',
+        'rating': 10,
+        'content': 'Grapes yeeeeeett.',
+        'src': 'https://image-cdn.symphonycommerce.com/images/sites/zevia/1548198170455_4685159556406169821.1200w.png'
+        #'src': 'https://www.zevia.com/sites/default/files/2019-07/GrapeNR-1.png'
+    },
+    {
+        'id': 1,
+        'name': 'Grape',
+        'rating': 10,
+        'content': 'Grapes yeeeeeett.',
+        'src': 'https://image-cdn.symphonycommerce.com/images/sites/zevia/1548198170455_4685159556406169821.1200w.png'
+        #'src': 'https://www.zevia.com/sites/default/files/2019-07/GrapeNR-1.png'
+    },
+    {
+        'id': 1,
+        'name': 'Grape',
+        'rating': 10,
+        'content': 'Grapes yeeeeeett.',
+        'src': 'https://image-cdn.symphonycommerce.com/images/sites/zevia/1548198170455_4685159556406169821.1200w.png'
+        #'src': 'https://www.zevia.com/sites/default/files/2019-07/GrapeNR-1.png'
+    },
+    {
+        'id': 1,
+        'name': 'Grape',
+        'rating': 10,
+        'content': 'Grapes yeeeeeett.',
+        'src': 'https://image-cdn.symphonycommerce.com/images/sites/zevia/1548198170455_4685159556406169821.1200w.png'
+        #'src': 'https://www.zevia.com/sites/default/files/2019-07/GrapeNR-1.png'
+    }, {
+        'id': 1,
+        'name': 'Grape',
+        'rating': 10,
+        'content': 'Grapes yeeeeeett.',
+        'src': 'https://image-cdn.symphonycommerce.com/images/sites/zevia/1548198170455_4685159556406169821.1200w.png'
+        #'src': 'https://www.zevia.com/sites/default/files/2019-07/GrapeNR-1.png'
+    },
+    {
+        'id': 1,
+        'name': 'Grape',
+        'rating': 10,
+        'content': 'Grapes yeeeeeett.',
+        'src': 'https://image-cdn.symphonycommerce.com/images/sites/zevia/1548198170455_4685159556406169821.1200w.png'
+        #'src': 'https://www.zevia.com/sites/default/files/2019-07/GrapeNR-1.png'
+    },
+    {
+        'id': 1,
+        'name': 'Grape',
+        'rating': 10,
+        'content': 'Grapes yeeeeeett.',
+        'src': 'https://image-cdn.symphonycommerce.com/images/sites/zevia/1548198170455_4685159556406169821.1200w.png'
+        #'src': 'https://www.zevia.com/sites/default/files/2019-07/GrapeNR-1.png'
+    },
+    {
+        'id': 1,
+        'name': 'Grape',
+        'rating': 10,
+        'content': 'Grapes yeeeeeett.',
+        'src': 'https://image-cdn.symphonycommerce.com/images/sites/zevia/1548198170455_4685159556406169821.1200w.png'
+        #'src': 'https://www.zevia.com/sites/default/files/2019-07/GrapeNR-1.png'
     },
     {
         'id': 1,
@@ -69,3 +164,12 @@ def get_rating(id):
     if drink is None:
         abort(404, description="Resource not found")
     return render_template("drink.html", title=drink.get('name'), drink=drink)
+
+
+@app.route('/drinks/<id>', methods=['POST'])
+def update_rating(id):
+    params = {
+        'description': request.values.get('description'),
+        'rating': request.get_json().get('rating')
+    }
+    return json.dumps(params)
