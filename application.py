@@ -1,4 +1,4 @@
-from drink_ratings import app  # application for AWS
+from drink_ratings import app as application  # application for AWS
 
 
 #__name__ will be main if this is ran directly with Python
