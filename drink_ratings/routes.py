@@ -74,6 +74,33 @@ def add_testimonial():
     return jsonify(testimonial.id)
 
 
+@app.route('/api/testimonials/<id>', methods=['POST', 'PUT'])
+def update_testimonial(id):
+    testimonial = Testimonial.query.get(id)
+
+    if not testimonial:
+        return {'error': 'testimonial not found'}, 400
+
+    data = request.get_json()
+    testimonial.name = data.get('name')
+    testimonial.testimonial = data.get('testimonial')
+    result = db.session.commit()
+    return jsonify(testimonial)
+
+
+@app.route('/api/testimonials/<id>', methods=['DELETE'])
+def delete_testimonial(id):
+    testimonial = Testimonial.query.get(id)
+
+    if not testimonial:
+        return {'error': 'testimonial not found'}, 400
+
+    db.session.delete(testimonial)
+    db.session.commit()
+
+    return {}
+
+
 @app.route('/')
 @app.route('/testimonials')
 def show_testimonials():
