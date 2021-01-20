@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Testimonial</h1>
+<p>This is what {{testimonial.name}} has to say:</p>
+    <p>{{testimonial.message}}</p>
+<a href="{{url_for('show_testimonials')}}"><button>view all</button></a>
+{% endblock %}

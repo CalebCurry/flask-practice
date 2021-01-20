@@ -9,6 +9,7 @@ itsdangerous==1.1.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
 Pillow==8.0.1
+psycopg2-binary==2.8.6
 pycparser==2.20
 PyJWT==1.7.1
 six==1.15.0

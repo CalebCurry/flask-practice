@@ -2,6 +2,8 @@ from drink_ratings import app, jwt, bcrypt
 from flask import render_template, abort, url_for, request, jsonify
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 import jwt
+from drink_ratings.models import Testimonial
+
 
 drinks = [
     {
@@ -24,12 +26,58 @@ drinks = [
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html', title="404"), 404
+    return render_template('404.html', error=e, title="Page Not Found"), 404
+
+
+testimonials = [
+    {
+        'id': 10,
+        'name': 'Connor',
+        'message': 'Your courses helped me land a job at McDonalds!'
+    },
+    {
+        'id': 35,
+        'name': 'Sarah',
+        'message': 'Never have I understood OOP until now.'
+    },
+    {
+        'id': 43,
+        'name': 'John',
+        'message': 'I watched all 200 hours straight!'
+    },
+]
+
+
+@app.route('/api/testimonials')
+def get_testimonials():
+    testimonials = Testimonial.query.all()
+    return jsonify({'testimonials': testimonials})
 
 
 @app.route('/')
-def hello_world():
-    return "hello World"
+@app.route('/testimonials')
+def show_testimonials():
+    return render_template('index.html', testimonials=testimonials)
+
+
+@app.route('/testimonials/<id>')
+def show_testimonial(id):
+
+    for testimonial in testimonials:
+        if testimonial.get('id') == int(id):
+            return render_template('testimonial.html', testimonial=testimonial)
+    abort(404)
+
+    '''
+    drink = None
+
+    for d in drinks:
+        if int(d.get('id')) == int(id):
+            drink = d
+    if drink is None:
+        abort(404, description="Resource not found")
+    return render_template("drink.html", title=drink.get('name'), drink=drink)
+    '''
 
 
 @app.route('/drinks')
@@ -63,6 +111,16 @@ def new_post():
 def notpass():
     pw_hash = bcrypt.generate_password_hash('passwordtest')
     return jsonify({'pw_hash': str(pw_hash)})
+
+
+@app.route('/api/testimonials')
+def get_testminonials():
+    return {'testimonials': ["great", "its ok", "fantastic"]} + 5
+
+
+@app.route('/api/string')
+def string():
+    return "this is a string"
 
 
 @app.route('/test', methods=['POST'])
