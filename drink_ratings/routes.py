@@ -1,4 +1,4 @@
-from drink_ratings import app, jwt, bcrypt
+from drink_ratings import app, jwt, bcrypt, db
 from flask import render_template, abort, url_for, request, jsonify
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 import jwt
@@ -52,6 +52,26 @@ testimonials = [
 def get_testimonials():
     testimonials = Testimonial.query.all()
     return jsonify({'testimonials': testimonials})
+
+
+@app.route('/api/testimonials/<id>')
+def get_testimonial(id):
+    testimonial = Testimonial.query.get(id)
+
+    if testimonial:
+        return jsonify(testimonial)
+
+    return {}
+
+
+@app.route('/api/testimonials', methods=['POST'])
+def add_testimonial():
+    data = request.get_json()
+    testimonial = Testimonial(name=data.get(
+        'name'), testimonial=data.get('testimonial'))
+    db.session.add(testimonial)
+    db.session.commit()
+    return jsonify(testimonial.id)
 
 
 @app.route('/')
