@@ -26,6 +26,6 @@ DB_HOSTNAME = os.environ.get('RDS_HOSTNAME')
 app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOSTNAME}/{DB_NAME}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-
+db.create_all()
 
 import drink_ratings.routes
