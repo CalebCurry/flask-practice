@@ -71,15 +71,14 @@ def login():
 
     user = User.query.filter_by(username=username).first()
 
+    if not user:
+        return {'error': 'invalid username or password'}, 400
     # return jsonify(bcrypt.check_password_hash(user.password, candidate)) #helpful to see
 
     if bcrypt.check_password_hash(user.password, candidate):
         access_token = create_access_token(
             identity={'username': username, 'role': 'admin'})
         return {'access_token': access_token}, 200
-
-    else:
-        return {'error': 'invalid Username or password'}, 400
 
 
 @app.route('/api/testimonials')
