@@ -80,6 +80,9 @@ def login():
             identity={'username': username, 'role': 'admin'})
         return {'access_token': access_token}, 200
 
+    else:
+        return {'error': 'invalid Username or password'}, 400
+
 
 @app.route('/api/testimonials')
 def get_testimonials():
