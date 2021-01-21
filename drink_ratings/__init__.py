@@ -7,7 +7,9 @@ app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
 # Setup the Flask-JWT-Extended extension
-app.config['JWT_SECRET_KEY'] = 'super-secret'  # Change this!
+print("key", os.environ.get('JWT_SECRET_KEY'))
+app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY')
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = 604800
 jwt = JWTManager(app)
 
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////data.db'

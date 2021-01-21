@@ -2,7 +2,7 @@ from drink_ratings import app, jwt, bcrypt, db
 from flask import render_template, abort, url_for, request, jsonify
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 import jwt
-from drink_ratings.models import Testimonial
+from drink_ratings.models import Testimonial, User
 
 
 drinks = [
@@ -48,6 +48,40 @@ testimonials = [
 ]
 
 
+@app.route('/api/create_user', methods=['POST'])
+def create_user():
+    username = request.get_json().get('username')
+    password = bcrypt.generate_password_hash(
+        request.get_json().get('password')).decode('utf-8')
+
+    user = User(username=username, password=password)
+    db.session.add(user)
+    db.session.commit()
+
+    return jsonify(user.id)
+
+
+@app.route('/api/login', methods=['POST'])
+def login():
+    username = request.get_json().get('username')
+    candidate = request.get_json().get('password')
+
+    if not username or not candidate:
+        return {'error': 'username and password data required'}
+
+    user = User.query.filter_by(username=username).first()
+
+    # return jsonify(bcrypt.check_password_hash(user.password, candidate)) #helpful to see
+
+    if bcrypt.check_password_hash(user.password, candidate):
+        access_token = create_access_token(
+            identity={'username': username, 'role': 'admin'})
+        return {'access_token': access_token}, 200
+
+    else:
+        return {'error': 'invalid Username or password'}, 400
+
+
 @app.route('/api/testimonials')
 def get_testimonials():
     testimonials = Testimonial.query.all()
@@ -75,6 +109,7 @@ def add_testimonial():
 
 
 @app.route('/api/testimonials/<id>', methods=['POST', 'PUT'])
+@jwt_required
 def update_testimonial(id):
     testimonial = Testimonial.query.get(id)
 
@@ -88,6 +123,7 @@ def update_testimonial(id):
     return jsonify(testimonial)
 
 
+@jwt_required
 @app.route('/api/testimonials/<id>', methods=['DELETE'])
 def delete_testimonial(id):
     testimonial = Testimonial.query.get(id)
@@ -170,6 +206,7 @@ def string():
     return "this is a string"
 
 
+"""
 @app.route('/test', methods=['POST'])
 def login():
     if not request.is_json:
@@ -190,6 +227,7 @@ def login():
         identity={'username': username, 'role': 'admin'})
 
     return jsonify(access_token=access_token), 200
+"""
 
 
 @app.route('/protected', methods=['GET'])
