@@ -123,8 +123,8 @@ def update_testimonial(id):
     return jsonify(testimonial)
 
 
-@jwt_required
 @app.route('/api/testimonials/<id>', methods=['DELETE'])
+@jwt_required
 def delete_testimonial(id):
     testimonial = Testimonial.query.get(id)
 
